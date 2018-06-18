@@ -27,30 +27,30 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
-      states: ["all", "active", "completed"],
-      dict : {
-        "all": "全部",
-        "active": "进行中",
-        "completed": "已完成"
+      states: ['all', 'active', 'completed'],
+      dict: {
+        'all': '全部',
+        'active': '进行中',
+        'completed': '已完成'
       }
-    };
+    }
   },
   computed: {
-    unFinishedTodoLength() {
-      return this.todos.filter(todo => !todo.completed).length;
+    unFinishedTodoLength () {
+      return this.todos.filter(todo => !todo.completed).length
     }
   },
   methods: {
-    toggleFilter(state) {
-      this.$emit("toggle", state);
+    toggleFilter (state) {
+      this.$emit('toggle', state)
     },
-    clearAllCompleted() {
-        this.$emit("clearAllCompleted");
+    clearAllCompleted () {
+      this.$emit('clearAllCompleted')
     }
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>

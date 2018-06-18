@@ -1,17 +1,17 @@
 const path = require('path')
-const HTMLPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-
+console.log(process.env.NODE_ENV)
 const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
   mode: process.env.NODE_ENV || 'production',
   target: 'web',
-  // entry: path.join(__dirname, 'src/index.js'),
+  entry: path.join(__dirname, 'src/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
     path: path.join(__dirname, 'dist')
@@ -25,6 +25,15 @@ const config = {
       {
         test: /\.jsx$/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+        // presets: ['latest'],
+        // plugins: ['transform-runtime']
+  }
       },
       {
         test: /\.(gif|jpg|jpeg|png|svg)$/,
@@ -46,7 +55,7 @@ const config = {
         NODE_ENV: isDev ? '"development"' : '"production"'
       }
     }),
-    new HTMLPlugin()
+    new HtmlWebpackPlugin()
   ]
 }
 
@@ -64,7 +73,20 @@ if (isDev) {
       },
       'stylus-loader'
     ]
-  })
+  },
+  {
+    test: /\.css/,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true,
+        }
+      }
+    ]
+  },{ test: /\.(eot|woff|woff2|ttf)([\?]?.*)$/, loader: "file-loader" })
   // config.devtool = '#cheap-module-eval-source-map'
   config.devServer = {
     port: 8000,

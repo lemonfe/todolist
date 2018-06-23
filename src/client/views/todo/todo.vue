@@ -12,14 +12,14 @@
       placeholder="记下接下来你想做的事情"
       @keyup.enter="addTodo"
     >
-    <Item 
+    <Item
         :todo="todo"
         v-for="todo in filteredTodos"
         :key="todo.id"
         @del="deleteTodo"
     />
-    <Tabs 
-        :filter="filter" 
+    <Tabs
+        :filter="filter"
         :todos="todos"
         @toggle="toggleFilter"
         @clearAllCompleted="clearAllCompleted"
@@ -40,6 +40,22 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
+  beforeRouteEnter (to, from, next) {
+    console.log('todo before enter')
+    next()
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('todo before update')
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('todo before leave')
+    if (global.confirm('确定离开这个页面么？')) {
+      next()
+    }
+    next()
+  },
+  props: ['id'],
   data () {
     return {
       todos: [],

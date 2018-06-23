@@ -2,3 +2,7 @@ dist
 node_modules
 .vscode
 .idea
+notes
+practice
+build/webpack.config.practice.js
+build/index.html

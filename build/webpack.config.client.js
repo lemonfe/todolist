@@ -14,6 +14,10 @@ const devServer = {
   overlay: {
     errors: true
   },
+  historyApiFallback: {
+    // 这里要依据publicPath来写
+    index: '/index.html'
+  },
   hot: true
 }
 const defaultPlugins = [
@@ -110,7 +114,7 @@ if (isDev) {
     plugins: [
       ...defaultPlugins,
       new ExtractTextPlugin(
-       filename = 'styles.[hash:8].css'
+        filename = 'styles.[hash:8].css' // eslint-disable-line
       )
     ]
   })

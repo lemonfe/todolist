@@ -2,7 +2,12 @@
     <div id="app">
     <div id="cover"></div>
     <Header></Header>
-    <Todo></Todo>
+    <!-- <Todo></Todo> -->
+    <router-link to="/todo">todo</router-link>
+    <router-link to="/login">login</router-link>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
     <Footer></Footer>
     </div>
 </template>
@@ -10,7 +15,7 @@
 <script>
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
-import Todo from './views/todo/todo.vue'
+// import Todo from './views/todo/todo.vue'
 
 export default {
   data () {
@@ -20,8 +25,11 @@ export default {
   },
   components: {
     Header,
-    Footer,
-    Todo
+    Footer
+    // Todo
+  },
+  mounted () {
+    console.log(this.$route)
   }
 }
 </script>

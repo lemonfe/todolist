@@ -10,10 +10,12 @@ const config = {
   entry: path.join(__dirname, '../src/client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../dist'),
+    publicPath: '/'
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(vue|js|jsx)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/,
